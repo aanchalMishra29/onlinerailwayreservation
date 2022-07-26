@@ -34,7 +34,7 @@ public class TrainController {
     }
 	
 	
-	@GetMapping("{trainid}")
+	@GetMapping("trainById/{trainid}")
 	public Optional<Train> getTrain(@PathVariable String trainid){
 		return trainService.getTrainbyId(trainid);
 	}
@@ -46,10 +46,9 @@ public class TrainController {
 		return "Train deleted with id : "+trainid;
     }
 	
-	@PutMapping("/update/{trainid}")
-	public Train updateTrain(@PathVariable("trainid") String trainid,@RequestBody Train t ) {
-		t.setTrainid(trainid);
-		trainService.addTrain(t);
+	@PutMapping("/update")
+	public Train updateTrain(@RequestBody Train t ) {
+		trainService.updateTrain(t);
 		return t;	
 }	
 }

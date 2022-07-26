@@ -13,67 +13,65 @@ import lombok.AllArgsConstructor;
 public class BookingOrder {
 
 	@Id
-	
-	private String id;
-	
-	@NotBlank(message="Please mention the quantity")
-	private String quantity;
-	
+	private String Id;
+	private String trainid;
+//	@NotBlank(message="Please mention the quantity")
+	private int quantity;
 	@NotBlank(message="Please mention the Start Station")
 	private String startStation;
-	
 	@NotBlank(message="Please mention the End Station")
 	private String endStation;
 	
-	public BookingOrder() {
-		
+	public String getTrainid() {
+		return trainid;
 	}
-
-	public BookingOrder(String id, String quantity, String startStation, String endStation) {
-		this.id = id;
-		this.quantity = quantity;
-		this.startStation = startStation;
-		this.endStation = endStation;
+	public void setTrainId(String trainid) {
+		this.trainid = trainid;
 	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
-
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
 	public String getStartStation() {
 		return startStation;
 	}
-
 	public void setStartStation(String startStation) {
 		this.startStation = startStation;
 	}
-
 	public String getEndStation() {
 		return endStation;
 	}
-
 	public void setEndStation(String endStation) {
 		this.endStation = endStation;
 	}
-
-	@Override
-	public String toString() {
-		return "BookingOrder [id=" + id + ", quantity=" + quantity + ", startStation=" + startStation + ", endStation="
-				+ endStation + "]";
+	
+	public String getId() {
+		return Id;
+	}
+	public void setId(String id) {
+		Id = id;
 	}
 
-
+	public BookingOrder(String id, String trainId, @NotBlank(message = "Please mention the quantity") int quantity,
+			@NotBlank(message = "Please mention the Start Station") String startStation,
+			@NotBlank(message = "Please mention the End Station") String endStation) {
+		super();
+		Id = id;
+		this.trainid = trainId;
+		this.quantity = quantity;
+		this.startStation = startStation;
+		this.endStation = endStation;
+	}
+	@Override
+	public String toString() {
+		return "BookingOrder [Id=" + Id + ", trainId=" + trainid + ", quantity=" + quantity + ", startStation="
+				+ startStation + ", endStation=" + endStation + "]";
+	}
+	public BookingOrder() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 }

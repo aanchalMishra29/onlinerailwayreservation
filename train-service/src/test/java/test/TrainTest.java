@@ -32,7 +32,7 @@ public class TrainTest {
 	@Test
 	public void getTrainTest() {
 		when(trainRepository.findAll())
-		.thenReturn(Stream.of(new Train("123","shatabdi", "kanpur", "delhi")).collect(Collectors.toList()));
+		.thenReturn(Stream.of(new Train("123","shatabdi", "kanpur", "delhi",60)).collect(Collectors.toList()));
 		assertEquals(1, trainService.getTrain().size());
 	}
 

@@ -22,7 +22,7 @@ public class UserController1 {
 	return trainService.getAllTrain();
 	
 }
-    @GetMapping("/findAllTrains/{trainid}")
+    @GetMapping("/findTrain/{trainid}")
     public Optional<Train> getTrains(@PathVariable String trainid){
 	return trainService.getTrainbyId(trainid);
 }

@@ -1,4 +1,4 @@
-package com.example.train.model;
+package com.example.bookingorder.model;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -10,11 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Train {
 	
 	@Id
-	@NotBlank(message = "Train id should be mentioned")
+	@NotBlank(message = "Train id should me mentioned")
 	@Size(max=6, message="Id should not be more than 6")
 	private String trainid;
 	
-	@NotBlank(message = "Train Name should be mentioned")
+	@NotBlank(message = "Train Name should me mentioned")
 	private String trainName;
 	
 	@NotBlank(message = "Start Station should me mentioned")
@@ -23,7 +23,7 @@ public class Train {
 	@NotBlank(message = "End Station should me mentioned")
 	private String endStation;
 	
-//	@NotBlank(message = "Train seats should me mentioned")
+	@NotBlank(message = "Train seats should me mentioned")
 	private int seats;
 		
 public int getSeats() {

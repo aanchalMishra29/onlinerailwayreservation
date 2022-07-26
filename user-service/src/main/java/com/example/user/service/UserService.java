@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.user.model.User;
+import com.example.user.model.UserModel;
 import com.example.user.repository.UserRepository;
 
 @Service
@@ -14,7 +14,7 @@ public class UserService {
 	@Autowired
 	private UserRepository ur;
 	
-	public User createUser(User user) {	
+	public UserModel createUser(UserModel user) {	
 		/*
 		 * String id = user.getId(); String userName = user.getUsername(); String
 		 * password = user.getPassword(); String phoneNumber = user.getPhoneNumber();
@@ -24,12 +24,16 @@ public class UserService {
 			return ur.save(user);
 	}
 	
-	public List<User> getAllUser() {
+	public List<UserModel> getAllUser() {
 		return ur.findAll();
 	}
 	
-	public User getUser(String id) {
-		User u= ur.findById(id).get();
+	public UserModel getUser(String id) {
+		UserModel u= ur.findById(id).get();
 		return u;
+	}
+	public UserModel findUserByName(String name) {
+		UserModel result=ur.findByuserName(name);
+		return result;
 	}
 }

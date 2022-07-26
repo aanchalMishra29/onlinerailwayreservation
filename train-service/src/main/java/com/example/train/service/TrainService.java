@@ -14,33 +14,36 @@ import com.example.train.repository.TrainRepository;
 public class TrainService {
 
 	@Autowired
-	private TrainRepository trainrepository;
+	private TrainRepository trainRepository;
 	
 
 	public Train addTrain (Train train) {
-		return trainrepository.save(train);
+		return trainRepository.save(train);
 	}
 
 	public List<Train> getTrain() {
-		List<Train> train = trainrepository.findAll();
+		List<Train> train = trainRepository.findAll();
 		System.out.println("Getting data from DB : " + train);
 		return train;
 	}
 
 	public Optional<Train> getTrainbyId(String id) {
-		return trainrepository.findById(id);
+		return trainRepository.findById(id);
 	}
 
 	public void deleteTrain(String trainid) {
-		trainrepository.deleteById(trainid);
+		trainRepository.deleteById(trainid);
 	}
 	
 	public List<Train> getAllTrain() {
-		List<Train> train = trainrepository.findAll();
+		List<Train> train = trainRepository.findAll();
 		return train;
 	}
 
-	
+	public void updateTrain(Train trainDetails) {
+		trainRepository.save(trainDetails);
+		
+	}
 
 
 }

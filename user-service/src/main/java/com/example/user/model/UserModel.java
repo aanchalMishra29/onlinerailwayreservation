@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 
 @Document(collection="User")
-public class User {
+public class UserModel {
 	
 	
 	@Id
@@ -33,7 +33,7 @@ public class User {
 	@Size(min=10, max = 10, message="Phone No. Should be of 10 digits" )
 	private String phoneNumber;
 
-	public User() {
+	public UserModel() {
 		
 	}
 	
@@ -82,7 +82,7 @@ public class User {
 		return "User [Id=" + id + ", username=" + userName + ", password=" + password + ", gender=" + gender
 				+ ", phoneNumber=" + phoneNumber + "]";
 	}
-	public User(String id, String userName, String password, String gender, String phoneNumber) {
+	public UserModel(String id, String userName, String password, String gender, String phoneNumber) {
 		super();
 		this.id = id;
 		this.userName = userName;

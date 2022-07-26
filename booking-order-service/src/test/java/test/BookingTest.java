@@ -31,7 +31,7 @@ public class BookingTest {
 	
 	@Test
 	public void saveTest() {
-		BookingOrder booking = new BookingOrder("123","4", "kanpur", "mumbai");
+		BookingOrder booking = new BookingOrder("123","12345", 4, "mumbai", "kanpur");
 		when(bookingOrderRepository.save(booking)).thenReturn(booking);
 		assertEquals(booking,bookingOrderService.addOrder(booking));	
 	}
