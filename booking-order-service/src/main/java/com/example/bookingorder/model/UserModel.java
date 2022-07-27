@@ -1,4 +1,4 @@
-package com.example.user.model;
+package com.example.bookingorder.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -82,10 +82,10 @@ public class UserModel {
 		return "User [Id=" + id + ", userName=" + userName + ", password=" + password + ", gender=" + gender
 				+ ", phoneNumber=" + phoneNumber + "]";
 	}
-	public UserModel(String id, String userName, String password, String gender, String phoneNumber) {
+	public UserModel(String id, String username, String password, String gender, String phoneNumber) {
 		super();
 		this.id = id;
-		this.userName = userName;
+		this.userName = username;
 		this.password = password;
 		this.gender = gender;
 		this.phoneNumber = phoneNumber;

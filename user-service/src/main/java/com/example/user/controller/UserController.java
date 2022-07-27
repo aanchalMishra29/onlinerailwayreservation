@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.user.exceptions.UserNotFoundException;
 import com.example.user.model.UserModel;
 import com.example.user.security.AuthenticationRequest;
 import com.example.user.security.AuthenticationResponse;
@@ -102,5 +103,9 @@ public class UserController {
 			return ResponseEntity.ok(new AuthenticationResponse(jwt));
 		}
 		
+		@RequestMapping("/getUser/{username}")
+		public UserModel getUser(@PathVariable String username) throws UserNotFoundException {
+			return userService.findUserByName(username);
+		}
 
 }

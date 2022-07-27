@@ -34,11 +34,11 @@ public class TrainController {
     }
 	
 	
-	@GetMapping("trainById/{trainid}")
-	public Optional<Train> getTrain(@PathVariable String trainid){
-		return trainService.getTrainbyId(trainid);
-	}
-	
+//	@GetMapping("trainById/{trainid}")
+//	public Optional<Train> getTrain(@PathVariable String trainid){
+//		return trainService.getTrainbyId(trainid);
+//	}
+//	
 	
 	@DeleteMapping("/delete/{trainid}")
 	public String deleteTrain (@PathVariable String trainid) {

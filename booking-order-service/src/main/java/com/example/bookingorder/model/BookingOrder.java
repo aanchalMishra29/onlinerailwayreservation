@@ -1,7 +1,7 @@
 package com.example.bookingorder.model;
 
 import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,6 +17,8 @@ public class BookingOrder {
 	private String trainid;
 //	@NotBlank(message="Please mention the quantity")
 	private int quantity;
+	@NotEmpty(message = "User Name Should not be blank")
+	private String userName;
 	@NotBlank(message="Please mention the Start Station")
 	private String startStation;
 	@NotBlank(message="Please mention the End Station")
@@ -54,20 +56,32 @@ public class BookingOrder {
 		Id = id;
 	}
 
-	public BookingOrder(String id, String trainId, @NotBlank(message = "Please mention the quantity") int quantity,
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public void setTrainid(String trainid) {
+		this.trainid = trainid;
+	}
+	
+	@Override
+	public String toString() {
+		return "BookingOrder [Id=" + Id + ", trainid=" + trainid + ", quantity=" + quantity + ", userName=" + userName
+				+ ", startStation=" + startStation + ", endStation=" + endStation + "]";
+	}
+	public BookingOrder(String id, String trainid, int quantity,
+			@NotEmpty(message = "User Name Should not be blank") String userName,
 			@NotBlank(message = "Please mention the Start Station") String startStation,
 			@NotBlank(message = "Please mention the End Station") String endStation) {
 		super();
 		Id = id;
-		this.trainid = trainId;
+		this.trainid = trainid;
 		this.quantity = quantity;
+		this.userName = userName;
 		this.startStation = startStation;
 		this.endStation = endStation;
-	}
-	@Override
-	public String toString() {
-		return "BookingOrder [Id=" + Id + ", trainId=" + trainid + ", quantity=" + quantity + ", startStation="
-				+ startStation + ", endStation=" + endStation + "]";
 	}
 	public BookingOrder() {
 		super();

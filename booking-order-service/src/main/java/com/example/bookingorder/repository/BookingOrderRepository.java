@@ -4,5 +4,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.example.bookingorder.model.BookingOrder;
 
-public interface BookingOrderRepository extends MongoRepository<BookingOrder, String> {}
+public interface BookingOrderRepository extends MongoRepository<BookingOrder, String> {
+	BookingOrder findByUserName(String userName);
+}
 
