@@ -21,6 +21,7 @@ public class BookingOrderService {
 	
 	public BookingOrder addOrder (BookingOrder order) {
 		Train train=restTemplate.getForObject("http://train-Service/trains/trainById/"+ order.getTrainid(), Train.class);
+		order.setTrainName(train.getTrainName());
 		if(train!=null && train.getSeats()>order.getQuantity()) {
 		updateSeats(order);
 		return  bookingOrderRepository.save(order);}
@@ -29,10 +30,12 @@ public class BookingOrderService {
 		}
 	}
 	
-	public BookingOrder getOrderbyName(String name) {
-		return bookingOrderRepository.findByUserName(name);
+	public Optional<BookingOrder> getOrder(String id) {
+		return bookingOrderRepository.findById(id);
 	}
 	public void deleteOrder(String id) {
+		Optional<BookingOrder> order=getOrder(id);
+		updateSeatsAfterCancellation(order);
 		bookingOrderRepository.deleteById(id);
 	}
 	public void updateSeats(BookingOrder book) {
@@ -40,6 +43,17 @@ public class BookingOrderService {
 		Train train=restTemplate.getForObject("http://train-Service/trains/trainById/"+ book.getTrainid(), Train.class);
 		train.setSeats(train.getSeats() - book.getQuantity());
 		restTemplate.put("http://train-Service/trains/update/", train);			     
+	}
+	public void updateSeatsAfterCancellation(Optional<BookingOrder> book) {
+		
+		BookingOrder book1=book.get();
+		Train train=restTemplate.getForObject("http://train-Service/trains/trainById/"+ book1.getTrainid(), Train.class);
+		train.setSeats(train.getSeats() + book1.getQuantity());
+		restTemplate.put("http://train-Service/trains/update/", train);			     
+	}
+	
+	public List<BookingOrder> findOrderByName(String name){
+		return bookingOrderRepository.findByuserName(name);
 	}
 }
 

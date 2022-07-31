@@ -6,18 +6,19 @@ import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "Contacts")
 
 public class Admin {
-
+	
 	@Id
-	@NotBlank(message = "Admin id should me mentioned")
-	@Size(max = 6, message = "Id should not be more than 6")
+	@NotEmpty(message = "Id Should not be blank")
+	@Size(max=6, message="Id should not be more than 6")
 	private String id;
 
 	@NotBlank(message = "Name should me mentioned")
-	private String username;
+	private String userName;
 
 	@NotEmpty(message = "Password should be entered properly")
 	@Size(min = 6, max = 20, message = "Password length should be between 6 to 20 characters")
@@ -31,10 +32,11 @@ public class Admin {
 
 	}
 
-	public Admin(String id, String username, String phoneNumber) {
+	public Admin(String id, String userName, String password, String phoneNumber) {
 		super();
-		this.id = id;
-		this.username = username;
+		this.id=id;
+		this.userName = userName;
+		this.password=password;
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -46,12 +48,12 @@ public class Admin {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPhoneNumber() {
@@ -72,7 +74,7 @@ public class Admin {
 
 	@Override
 	public String toString() {
-		return "Admin [id=" + id + ", username=" + username + ", password=" + password + ", phoneNumber=" + phoneNumber
+		return "Admin [userName=" + userName + ", password=" + password + ", phoneNumber=" + phoneNumber
 				+ "]";
 	}
 

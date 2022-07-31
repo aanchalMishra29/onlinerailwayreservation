@@ -7,23 +7,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.example.admincontact.model.Admin;
 import com.example.admincontact.repositry.AdminContactRepository;
+import com.example.admincontact.service.AdminContactService;
 
 @Service
-public class UserService1 implements UserDetailsService{
+public class MyUserDetailsService implements UserDetailsService{
 	
 	@Autowired
-	AdminContactRepository adminRepo;
+	AdminContactRepository adminService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Admin foundedUser=adminRepo.findByusername(username);
+		Admin foundedUser=adminService.findByuserName(username);
 		if (foundedUser==null) {
 			return null;
 		}
-		String user=foundedUser.getUsername();
+		String user=foundedUser.getUserName();
 		String pass=foundedUser.getPassword();
 		return new User(user, pass,new ArrayList<>());
 	}

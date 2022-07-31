@@ -2,6 +2,7 @@ package com.example.admincontact.service;
 
 import java.util.List;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +19,21 @@ public class AdminContactService {
 	private AdminContactRepository contactRepository;
 	
 
-	public Admin addAdmin (Admin admin) {
-		return contactRepository.save(admin);
+	
+	public Admin createUser(Admin user) {	
+			return contactRepository.save(user);
 	}
-
-	public List<Admin> getAdmin() {
-		List<Admin> admin = contactRepository.findAll();
-		return admin;
+	
+	public List<Admin> getAllUser() {
+		return contactRepository.findAll();
 	}
-
-	public Optional<Admin> getAdminbyId(String id) {
-		return contactRepository.findById(id);
+	
+	public Admin getUser(String id) {
+		Admin ad= contactRepository.findById(id).get();
+		return ad;
 	}
-
-	public void deleteAdmin(String id) {
-		contactRepository.deleteById(id);
-	}
-	public Admin findAdminByName(String name) {
-		Admin result=contactRepository.findByusername(name);
+	public Admin findUserByName(String name) {
+		Admin result=contactRepository.findByuserName(name);
 		return result;
 	}
 }
-

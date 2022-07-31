@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,9 +32,22 @@ public class BookingTest {
 	
 	@Test
 	public void saveTest() {
-		BookingOrder booking = new BookingOrder("123","12345", 4,"aanchal" ,"mumbai", "kanpur");
+		BookingOrder booking = new BookingOrder(new ObjectId(),"12345","pushpak express", 4,"aanchal" ,"mumbai", "kanpur");
 		when(bookingOrderRepository.save(booking)).thenReturn(booking);
 		assertEquals(booking,bookingOrderService.addOrder(booking));	
 	}
+
+	
+	@Test
+	public void getIdTest() {
+		String id="123";
+		Optional<BookingOrder> orderOpt = Optional.of(new BookingOrder(new ObjectId(),"12345","pushpak express", 4,"aanchal" ,"mumbai", "kanpur"));
+		when(bookingOrderRepository.findById(id))
+		.thenReturn(orderOpt);
+		BookingOrder booking = orderOpt.get();
+		assertEquals(booking, bookingOrderService.getOrder(id));
+	}
+	
+	
 
 }

@@ -1,12 +1,15 @@
 package com.example.user.service;
 
-import java.util.List;
+
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.client.RestTemplate;
+import com.example.user.model.BookingOrder;
 import com.example.user.model.UserModel;
 import com.example.user.repository.UserRepository;
+
 
 @Service
 public class UserService {
@@ -14,13 +17,10 @@ public class UserService {
 	@Autowired
 	private UserRepository ur;
 	
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	public UserModel createUser(UserModel user) {	
-		/*
-		 * String id = user.getId(); String userName = user.getUsername(); String
-		 * password = user.getPassword(); String phoneNumber = user.getPhoneNumber();
-		 * String gender = user.getGender(); List<User> user1 = getAllUser(); long count
-		 * = 0; count = user1.stream().filter((i) -> i.getId() == user.getId()).count();
-		 */
 			return ur.save(user);
 	}
 	

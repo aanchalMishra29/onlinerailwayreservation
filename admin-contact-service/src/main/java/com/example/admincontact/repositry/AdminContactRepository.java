@@ -4,8 +4,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.example.admincontact.model.Admin;
 
 public interface AdminContactRepository extends MongoRepository<Admin, String> {
-
-	Admin findByusername(String username);
-
+	Admin findByuserName(String userName);
 }
 

@@ -1,5 +1,4 @@
-package com.example.admincontact.security;
-
+package com.example.bookingorder.security;
 
 public class AuthenticationRequest {
 
@@ -25,6 +24,6 @@ public class AuthenticationRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	
 }
+

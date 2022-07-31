@@ -3,8 +3,13 @@ package com.example.bookingorder.model;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import lombok.AllArgsConstructor;
 
@@ -13,9 +18,12 @@ import lombok.AllArgsConstructor;
 public class BookingOrder {
 
 	@Id
-	private String Id;
+	@JsonSerialize(using=ToStringSerializer.class)
+	private ObjectId id;
+	@NotEmpty(message = "Train id Should not be blank")
 	private String trainid;
-//	@NotBlank(message="Please mention the quantity")
+	@NotEmpty(message = "Train Name Should not be blank")
+	private String trainName;
 	private int quantity;
 	@NotEmpty(message = "User Name Should not be blank")
 	private String userName;
@@ -49,12 +57,10 @@ public class BookingOrder {
 		this.endStation = endStation;
 	}
 	
-	public String getId() {
-		return Id;
+	public ObjectId getId() {
+		return id;
 	}
-	public void setId(String id) {
-		Id = id;
-	}
+
 
 	public String getUserName() {
 		return userName;
@@ -66,18 +72,29 @@ public class BookingOrder {
 		this.trainid = trainid;
 	}
 	
+	
+	public String getTrainName() {
+		return trainName;
+	}
+	public void setTrainName(String trainName) {
+		this.trainName = trainName;
+	}
+
 	@Override
 	public String toString() {
-		return "BookingOrder [Id=" + Id + ", trainid=" + trainid + ", quantity=" + quantity + ", userName=" + userName
-				+ ", startStation=" + startStation + ", endStation=" + endStation + "]";
+		return "BookingOrder [id=" + id + ", trainid=" + trainid + ", trainName=" + trainName + ", quantity=" + quantity
+				+ ", userName=" + userName + ", startStation=" + startStation + ", endStation=" + endStation + "]";
 	}
-	public BookingOrder(String id, String trainid, int quantity,
+	
+	public BookingOrder(ObjectId id, @NotEmpty(message = "Train id Should not be blank") String trainid,
+			@NotEmpty(message = "Train Name Should not be blank") String trainName, int quantity,
 			@NotEmpty(message = "User Name Should not be blank") String userName,
 			@NotBlank(message = "Please mention the Start Station") String startStation,
 			@NotBlank(message = "Please mention the End Station") String endStation) {
 		super();
-		Id = id;
+		this.id = id;
 		this.trainid = trainid;
+		this.trainName = trainName;
 		this.quantity = quantity;
 		this.userName = userName;
 		this.startStation = startStation;
