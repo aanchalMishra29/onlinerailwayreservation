@@ -1,9 +1,8 @@
 package test;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-
+import static org.junit.Assert.assertNull;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,22 +31,39 @@ public class AdminTest {
 	public void addAdminTest() {
 		Admin admin = new Admin("111", "aanchal","aanchal123" ,"8574063515");
 		when(adminContactRepository.save(admin)).thenReturn(admin);
-		assertEquals(admin,adminContactService.createUser(admin));	
+		assertEquals(admin,adminContactService.createAdmin(admin));	
 	}
 	@Test
-	public void findAllAdmin() {
+	public void findAllAdminTest() {
 		when(adminContactRepository.findAll())
 		.thenReturn(Stream.of(new Admin("111", "aanchal","aanchal123","9401222895")).collect(Collectors.toList()));
-		assertEquals(1, adminContactService.getAllUser().size());
+		assertEquals(1, adminContactService.getAllAdmin().size());
 	}
 	@Test
-	public void findAdminById() {
+	public void findAdminByIdTest() {
 		String id="123";
 		Optional<Admin> adminOpt = Optional.of(new Admin("123", "aanchal","aanchal123","9401222895"));
 		when(adminContactRepository.findById(id))
 		.thenReturn(adminOpt);
 		Admin admin = adminOpt.get();
-		assertEquals(admin, adminContactService.getUser(id));
+		assertEquals(admin, adminContactService.getAdmin(id));
+	}
+	
+	@Test
+	public void findAdminByNameTest() {
+		String userName="aanchal";
+		Admin adminOpt = new Admin("123", "aanchal","aanchal123","9401222895");
+		when(adminContactRepository.findByuserName(userName))
+		.thenReturn(adminOpt);
+		assertEquals(adminOpt, adminContactService.findAdminByName(userName));
+	}
+	
+	@Test
+	public void deleteByuserNameTest() {
+		String userName = "aanchal";
+		adminContactRepository.deleteByuserName(userName);
+		//assertNull(userName);
+		assertNull(adminContactRepository.findByuserName(userName));	
 	}
 	
 }

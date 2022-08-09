@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,9 +34,9 @@ import com.example.user.util.CustomMessage;
 import com.example.user.util.MessageListener;
 import com.example.user.util.MqConfig;
 
-@CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("User")
+@CrossOrigin("http://localhost:3000")
+@RequestMapping("user")
 public class UserController {
 
 	@Autowired
@@ -51,7 +52,7 @@ public class UserController {
 	Logger logger= org.slf4j.LoggerFactory.getLogger(UserController.class);
 	
 	//Create Account
-		@PostMapping("createUser")
+		@PostMapping("createuser")
 		public ResponseEntity<AuthenticationResponse> createCustomer(@Valid @RequestBody UserModel user) {
 			UserModel userModel=new UserModel();
 			UserModel oldusermodel=new UserModel();
@@ -87,12 +88,6 @@ public class UserController {
 			return new ResponseEntity<UserModel>(us , HttpStatus.OK);
 		}
 		
-//	//list of all users
-//		@GetMapping("displayAll")
-//		public List<UserModel> displayAll(){
-//			logger.info("----------------------- All User -------------------");
-//			return userService.getAllUser();
-//		}
 		
 		//for login
 		@PostMapping("/auth")
@@ -114,18 +109,19 @@ public class UserController {
 			return ResponseEntity.ok(new AuthenticationResponse(jwt));
 		}
 		
-		@RequestMapping("/getUser/{username}")
+		@GetMapping("/getuser/{username}")
 		public UserModel getUser(@PathVariable String username) throws UserNotFoundException {
 			logger.info("-----------------------User fetched by username --------------------");
 			return userService.findUserByName(username);
 		}
+		@GetMapping("/displayall")
+		public List<UserModel> displayAllUser(){
+			logger.info("----------------------- All User -------------------");
+			return userService.getAllUser();
+		}
 		
-		
-//		@GetMapping("/notifications")
-////	    @RabbitListener(queues = MqConfig.QUEUE)
-//	    public ResponseEntity<CustomMessage> message(CustomMessage cm) {
-//			CustomMessage sms=message.listener(cm);
-//			return new ResponseEntity<CustomMessage>(sms, HttpStatus.OK);
-//	    }
 
-}
+		@GetMapping(value = "/notification", produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity <List<String>> getnNotification() {
+			return ResponseEntity.ok (MessageListener.getMessageList());
+}}

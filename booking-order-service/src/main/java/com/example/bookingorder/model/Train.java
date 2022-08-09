@@ -8,25 +8,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Trains")
 public class Train {
-	
+
 	@Id
-	@NotBlank(message = "Train id should me mentioned")
-	@Size(max=6, message="Id should not be more than 6")
+	@NotBlank(message = "Train id should be mentioned")
+	@Size(max = 6, message = "Id should not be more than 6")
 	private String trainid;
-	
-	@NotBlank(message = "Train Name should me mentioned")
+
+	@NotBlank(message = "Train Name should be mentioned")
 	private String trainName;
-	
-	@NotBlank(message = "Start Station should me mentioned")
+
+	@NotBlank(message = "Start Station should be mentioned")
 	private String startStation;
-	
-	@NotBlank(message = "End Station should me mentioned")
+
+	@NotBlank(message = "End Station should be mentioned")
 	private String endStation;
-	
-	@NotBlank(message = "Train seats should me mentioned")
+
+//	@NotBlank(message = "Train seats should be mentioned")
 	private int seats;
-		
-public int getSeats() {
+	@NotBlank(message = "Date should be mentioned")
+	private String date;
+
+	public int getSeats() {
 		return seats;
 	}
 
@@ -34,49 +36,57 @@ public int getSeats() {
 		this.seats = seats;
 	}
 
-public Train() {
-	
-}
+	public String getDate() {
+		return date;
+	}
 
-public Train(String trainid, String trainName, String startStation, String endStation,int seats) {
-	super();
-	this.trainid = trainid;
-	this.trainName = trainName;
-	this.startStation = startStation;
-	this.endStation = endStation;
-	this.seats=seats;
-}
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-public String getTrainid() {
-	return trainid;
-}
+	public String getTrainid() {
+		return trainid;
+	}
 
-public void setTrainid(String trainid2) {
-	this.trainid = trainid2;
-}
+	public void setTrainid(String trainid2) {
+		this.trainid = trainid2;
+	}
 
-public String getTrainName() {
-	return trainName;
-}
+	public String getTrainName() {
+		return trainName;
+	}
 
-public void setTrainName(String trainName) {
-	this.trainName = trainName;
-}
+	public void setTrainName(String trainName) {
+		this.trainName = trainName;
+	}
 
-public String getStartStation() {
-	return startStation;
-}
+	public String getStartStation() {
+		return startStation;
+	}
 
-public void setStartStation(String startStation) {
-	this.startStation = startStation;
-}
+	public void setStartStation(String startStation) {
+		this.startStation = startStation;
+	}
 
-public String getEndStation() {
-	return endStation;
-}
+	public String getEndStation() {
+		return endStation;
+	}
 
-public void setEndStation(String endStation) {
-	this.endStation = endStation;
-}
-	
+	public void setEndStation(String endStation) {
+		this.endStation = endStation;
+	}
+	public Train() {
+
+	}
+
+	public Train(String trainid, String trainName, String startStation, String endStation, int seats,String date) {
+		super();
+		this.trainid = trainid;
+		this.trainName = trainName;
+		this.startStation = startStation;
+		this.endStation = endStation;
+		this.seats = seats;
+		this.date=date;
+	}
+
 }

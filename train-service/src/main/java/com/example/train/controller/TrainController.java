@@ -28,7 +28,7 @@ public class TrainController {
 
 	Logger logger = org.slf4j.LoggerFactory.getLogger(TrainController.class);
 
-	@PostMapping("/addTrain")
+	@PostMapping("/addtrain")
 	public String saveTrain(@Valid @RequestBody Train train) {
 		trainService.addTrain(train);
 		trainService.publishMessage(train.getTrainid(), train.getStartStation(), train.getEndStation());
@@ -36,7 +36,7 @@ public class TrainController {
 		return "Added train with id :  " + train.getTrainid();
 	}
 
-	@GetMapping("trainById/{trainid}")
+	@GetMapping("trainbyid/{trainid}")
 	public Optional<Train> getTrain(@PathVariable String trainid) {
 		logger.info("-----------------------Train Details fetched by entering train id-------------------");
 		return trainService.getTrainbyId(trainid);
@@ -56,7 +56,7 @@ public class TrainController {
 		return t;
 	}
 
-	@GetMapping("/findAllTrains")
+	@GetMapping("/findalltrains")
 	public List<Train> getTrains() {
 		logger.info("----------------------All available trains are displayed-------------------");
 		return trainService.getAllTrain();

@@ -27,5 +27,8 @@ public class CustomMessage {
 	public void setMessageDate(Date messageDate) {
 		this.messageDate = messageDate;
 	}
-	
+	@Override
+	public String toString() {
+		return "New Notification [messageId=" + messageId + ", message=" + message + ", messageDate=" + messageDate + "]";
+	}
 }

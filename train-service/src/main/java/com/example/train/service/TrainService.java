@@ -55,7 +55,7 @@ public class TrainService {
 	public void publishMessage(String trainId,String source,String destination) {
 		CustomMessage message=new CustomMessage();
         message.setMessageId(UUID.randomUUID().toString());
-        message.setMessage("New Train is added with train id "+trainId +" from "+source +" to "+destination);
+        message.setMessage("New Train is added with train id "+trainId +" from "+source +" to "+destination+" ");
         message.setMessageDate(new Date());
         template.convertAndSend(MqConfig.EXCHANGE,
                 MqConfig.ROUTING_KEY, message);

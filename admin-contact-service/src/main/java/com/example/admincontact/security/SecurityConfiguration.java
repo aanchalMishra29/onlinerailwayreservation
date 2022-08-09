@@ -38,8 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.csrf().disable().authorizeRequests().antMatchers("/Admin/auth",
-				"/Admin/createAdmin","/Admin/getAdmin/{username}",
+		http.csrf().disable().authorizeRequests().antMatchers("/admin/auth","admin/getadmin/{username}",
+				"/admin/createadmin","/admin/getadmin/{username}","/admin/displayalluser",
 				"/v3/api-docs/**","/v2/api-docs/**",
 				"/swagger-ui/**","/swagger-resources/**",
 				"/webjars/**")

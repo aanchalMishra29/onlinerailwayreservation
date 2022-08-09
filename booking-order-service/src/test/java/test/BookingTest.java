@@ -32,7 +32,7 @@ public class BookingTest {
 	
 	@Test
 	public void saveTest() {
-		BookingOrder booking = new BookingOrder(new ObjectId(),"12345","pushpak express", 4,"aanchal" ,"mumbai", "kanpur");
+		BookingOrder booking = new BookingOrder(new ObjectId(),"12345","pushpak express", 4,"aanchal" ,"mumbai", "kanpur","19-08-2022","xyz@gmail.com");
 		when(bookingOrderRepository.save(booking)).thenReturn(booking);
 		assertEquals(booking,bookingOrderService.addOrder(booking));	
 	}
@@ -41,7 +41,7 @@ public class BookingTest {
 	@Test
 	public void getIdTest() {
 		String id="123";
-		Optional<BookingOrder> orderOpt = Optional.of(new BookingOrder(new ObjectId(),"12345","pushpak express", 4,"aanchal" ,"mumbai", "kanpur"));
+		Optional<BookingOrder> orderOpt = Optional.of(new BookingOrder(new ObjectId(),"12345","pushpak express", 4,"aanchal" ,"mumbai", "kanpur","19-08-2022","xyz@gmail.com"));
 		when(bookingOrderRepository.findById(id))
 		.thenReturn(orderOpt);
 		BookingOrder booking = orderOpt.get();

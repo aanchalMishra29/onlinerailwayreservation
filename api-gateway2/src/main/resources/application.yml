@@ -21,15 +21,15 @@ spring:
       - id: admin-contact-service
         uri: lb://admin-contact-service
         predicates:
-        - Path=/Admin/**  
+        - Path=/admin/**  
       - id: booking-order-service
         uri: lb://booking-order-service
         predicates:
-        - Path=/Orders/**
+        - Path=/orders/**
       - id: train-service
         uri: lb://train-service
         predicates:
-        - Path=/Trains/**
+        - Path=/trains/**
       - id: payment-service
         uri: lb://payment-service
         predicates:
@@ -37,4 +37,4 @@ spring:
       - id: user-service
         uri: lb://user-service
         predicates:
-        - Path=/User/**
+        - Path=/user/**

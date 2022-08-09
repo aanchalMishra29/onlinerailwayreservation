@@ -27,7 +27,7 @@ public class CustomMessage {
 	}
 	@Override
 	public String toString() {
-		return "CustomMessage [messageId=" + messageId + ", message=" + message + ", messageDate=" + messageDate + "]";
+		return "New Notification [messageId=" + messageId + ", message=" + message + ", messageDate=" + messageDate + "]";
 	}
 	
 }

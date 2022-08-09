@@ -1,7 +1,9 @@
 package com.example.admincontact.controller;
 
 import java.util.*;
+
 import javax.validation.Valid;
+import javax.ws.rs.Consumes;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +26,17 @@ import org.springframework.security.authentication.BadCredentialsException;
 import com.example.admincontact.model.Admin;
 import com.example.admincontact.repositry.AdminContactRepository;
 import com.example.admincontact.service.AdminContactService;
+import com.example.admincontact.model.UserModel;
 import com.example.admincontact.exceptions.UserNotFoundException;
 import com.example.admincontact.security.AuthenticationRequest;
 import com.example.admincontact.security.AuthenticationResponse;
 import com.example.admincontact.security.JwtUtil;
 import com.example.admincontact.security.MyUserDetailsService;
 
-@CrossOrigin("http://localhost:3000")
+
 @RestController
-@RequestMapping("Admin")
+@CrossOrigin(origins="http://localhost:3000")
+@RequestMapping("admin")
 public class AdminContactController {
 	
 	@Autowired
@@ -46,11 +50,12 @@ public class AdminContactController {
 	Logger logger= org.slf4j.LoggerFactory.getLogger(AdminContactController.class);
 
 	//Create Account
-	@PostMapping("createAdmin")
+	
+	@PostMapping("createadmin")
 	public ResponseEntity<AuthenticationResponse> addAdmin(@Valid @RequestBody Admin user) {
 		Admin admin=new Admin();
 		Admin oldAdmin=new Admin();
-		oldAdmin=adminContactService.findUserByName(user.getUserName());				
+		oldAdmin=adminContactService.findAdminByName(user.getUserName());				
 			if (!Objects.isNull(oldAdmin) && oldAdmin.getUserName().equals(user.getUserName()) ) {
 				
 				return new ResponseEntity<AuthenticationResponse>(new AuthenticationResponse
@@ -62,7 +67,7 @@ public class AdminContactController {
 		admin.setPassword(user.getPassword());
 		admin.setPhoneNumber(user.getPhoneNumber());
 		try {
-			adminContactService.createUser(admin);
+			adminContactService.createAdmin(admin);
 		}
 		catch(Exception e){
 			return new ResponseEntity<AuthenticationResponse>(new AuthenticationResponse
@@ -73,22 +78,19 @@ public class AdminContactController {
 				("Successful singup for client " +user.getUserName()), HttpStatus.OK);
 	}}
 
-//display users by their id
 	@GetMapping("display/{id}")
 	public ResponseEntity<Admin> display(@PathVariable("id") String id){
-		Admin ad = adminContactService.getUser(id);
+		Admin ad = adminContactService.getAdmin(id);
 		logger.info("-----------------------Admin display by id-------------------");
 		return new ResponseEntity<Admin>(ad , HttpStatus.OK);
 	}
 	
-//list of all users
-	@GetMapping("displayAll")
+	@GetMapping("displayall")
 	public List<Admin> displayAll(){
 		logger.info("----------------------- All Admin -------------------");
-		return adminContactService.getAllUser();
+		return adminContactService.getAllAdmin();
 	}
 	
-	//for login
 	@PostMapping("/auth")
 	private ResponseEntity<?> authenticateClient(@RequestBody AuthenticationRequest authreq){
 		String username=authreq.getUsername();
@@ -109,8 +111,20 @@ public class AdminContactController {
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 	
-	@RequestMapping("/getAdmin/{username}")
+	@GetMapping("/getadmin/{username}")
 	public Admin getUser(@PathVariable String username) throws UserNotFoundException {
 		logger.info("-----------------------Admin fetched by username --------------------");
-		return adminContactService.findUserByName(username);
-	}}
+		return adminContactService.findAdminByName(username);
+	}
+	
+	@GetMapping("/displayalluser")
+	public List<UserModel> displayAllUser(){
+		logger.info("----------------------- All User -------------------");
+		return adminContactService.getAllUser();
+	}
+	
+	@DeleteMapping("/removeadmin/{username}")
+	public String removeUser(@PathVariable String username) throws UserNotFoundException {
+		return adminContactService.removeAdmin(username);
+	}
+}
