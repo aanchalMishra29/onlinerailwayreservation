@@ -10,7 +10,6 @@ import com.example.admincontact.security.AuthenticationRequest;
 import com.example.admincontact.security.AuthenticationResponse;
 
 import static springfox.documentation.builders.PathSelectors.regex;
-
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;

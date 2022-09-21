@@ -122,6 +122,6 @@ public class UserController {
 		
 
 		@GetMapping(value = "/notification", produces = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity <List<String>> getnNotification() {
+		public ResponseEntity <List<String>> getNotification() {
 			return ResponseEntity.ok (MessageListener.getMessageList());
 }}

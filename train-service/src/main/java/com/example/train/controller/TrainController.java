@@ -44,9 +44,9 @@ public class TrainController {
 
 	@DeleteMapping("/delete/{trainid}")
 	public String deleteTrain(@PathVariable String trainid) {
-		trainService.deleteTrain(trainid);
+		String result=trainService.deleteTrain(trainid);
 		logger.info("-----------------------Train Deleted-------------------");
-		return "Train deleted with id : " + trainid;
+		return result;
 	}
 
 	@PutMapping("/update")

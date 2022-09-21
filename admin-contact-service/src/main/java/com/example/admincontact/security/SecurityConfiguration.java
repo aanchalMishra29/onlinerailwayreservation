@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.csrf().disable().authorizeRequests().antMatchers("/admin/auth","admin/getadmin/{username}",
-				"/admin/createadmin","/admin/getadmin/{username}","/admin/displayalluser",
+				"/admin/createadmin","/admin/getadmin/{username}","/admin/displayalluser","/admin/displayall",
 				"/v3/api-docs/**","/v2/api-docs/**",
 				"/swagger-ui/**","/swagger-resources/**",
 				"/webjars/**")

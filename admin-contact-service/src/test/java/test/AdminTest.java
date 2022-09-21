@@ -28,25 +28,16 @@ public class AdminTest {
 	private AdminContactRepository adminContactRepository;
 	
 	@Test
-	public void addAdminTest() {
+	public void createAdminTest() {
 		Admin admin = new Admin("111", "aanchal","aanchal123" ,"8574063515");
 		when(adminContactRepository.save(admin)).thenReturn(admin);
 		assertEquals(admin,adminContactService.createAdmin(admin));	
 	}
 	@Test
-	public void findAllAdminTest() {
+	public void getAllAdminTest() {
 		when(adminContactRepository.findAll())
 		.thenReturn(Stream.of(new Admin("111", "aanchal","aanchal123","9401222895")).collect(Collectors.toList()));
 		assertEquals(1, adminContactService.getAllAdmin().size());
-	}
-	@Test
-	public void findAdminByIdTest() {
-		String id="123";
-		Optional<Admin> adminOpt = Optional.of(new Admin("123", "aanchal","aanchal123","9401222895"));
-		when(adminContactRepository.findById(id))
-		.thenReturn(adminOpt);
-		Admin admin = adminOpt.get();
-		assertEquals(admin, adminContactService.getAdmin(id));
 	}
 	
 	@Test
@@ -59,10 +50,9 @@ public class AdminTest {
 	}
 	
 	@Test
-	public void deleteByuserNameTest() {
+	public void removeAdminTest() {
 		String userName = "aanchal";
 		adminContactRepository.deleteByuserName(userName);
-		//assertNull(userName);
 		assertNull(adminContactRepository.findByuserName(userName));	
 	}
 	

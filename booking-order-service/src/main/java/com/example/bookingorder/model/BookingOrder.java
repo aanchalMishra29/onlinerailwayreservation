@@ -116,6 +116,7 @@ public class BookingOrder {
 		this.date = date;
 		this.email = email;
 	}
+
 	public BookingOrder() {
 		super();
 		// TODO Auto-generated constructor stub

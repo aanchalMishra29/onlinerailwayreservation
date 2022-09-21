@@ -39,8 +39,15 @@ public class TrainService {
 		return trainRepository.findById(id);
 	}
 
-	public void deleteTrain(String trainid) {
+	public String deleteTrain(String trainid) {
+		Optional<Train> train=getTrainbyId(trainid);
+		Train t=train.get();
+		if(t!=null) {
 		trainRepository.deleteById(trainid);
+		return "Train deleted with id "+trainid;}
+		else {
+			return "No such train exist with given id";
+		}
 	}
 	
 	public List<Train> getAllTrain() {

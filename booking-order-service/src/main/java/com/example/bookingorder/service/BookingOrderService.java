@@ -36,10 +36,16 @@ public class BookingOrderService {
 	public Optional<BookingOrder> getOrder(String id) {
 		return bookingOrderRepository.findById(id);
 	}
-	public void deleteOrder(String id) {
+	public String deleteOrder(String id) {
 		Optional<BookingOrder> order=getOrder(id);
+		BookingOrder bookingOrder=order.get();
+		if(bookingOrder!=null) {
 		updateSeatsAfterCancellation(order);
 		bookingOrderRepository.deleteById(id);
+		return "Reservation Canceled";}
+		else {
+			return "No booking available with given ticket id";
+		}
 	}
 	public void updateSeats(BookingOrder book) {
 		

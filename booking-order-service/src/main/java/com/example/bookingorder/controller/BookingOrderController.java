@@ -7,8 +7,11 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,32 +37,32 @@ public class BookingOrderController {
 	Logger logger= org.slf4j.LoggerFactory.getLogger(BookingOrderController.class);
 
 	@PostMapping("addorder")
-	public String saveOrder(@Valid @RequestBody BookingOrder order) {
-	BookingOrder BookingOrder=	bookingOrderService.addOrder(order);
-	if(BookingOrder!=null) {
+	public ResponseEntity <BookingOrder> saveOrder(@Valid @RequestBody BookingOrder order) {
+	BookingOrder bookingOrder=	bookingOrderService.addOrder(order);
+	if(bookingOrder!=null) {
 	logger.info("-----------------------Ticket Booked-------------------");
 	bookingOrderService.sendEmail(order);
-	return "Booked ticket with id :  " + order.getId();}
+	return new ResponseEntity<BookingOrder>(bookingOrder,HttpStatus.OK);}
 	else {
 		logger.info("-----------------------There is some problem in ticket booking-------------------");
-		return "Please try for another train";
+		return new ResponseEntity<BookingOrder>(bookingOrder,HttpStatus.OK);}
 	}
-    }
 	@GetMapping("getorder/{id}")
 	public Optional<BookingOrder> getOrder(@PathVariable String id){
 		logger.info("-----------------------Ticket Details by entering ticket id-------------------");
 		return  bookingOrderService.getOrder(id);
 	}
 	@GetMapping("getorderbyname/{userName}")
-	public List<BookingOrder> getOrderByName(@PathVariable String userName){
+	public ResponseEntity <Object> getOrderByName(@PathVariable String userName){
 		logger.info("-----------------------Ticket Details by entering Username-------------------");
-		return  bookingOrderService.findOrderByName(userName);
+		List<BookingOrder> bookingOrder=bookingOrderService.findOrderByName(userName);
+		return new ResponseEntity<Object>(bookingOrder,HttpStatus.OK);
 	}
 	 @DeleteMapping("del/{id}")
 	 public String deleteOrder (@PathVariable String id) {
-		 bookingOrderService.deleteOrder(id);
+		String result= bookingOrderService.deleteOrder(id);
 		logger.info("-----------------------Ticket Booking canceled-------------------");
-		return "Your Booking canceled with ticket id "+id;
+		return result;
 		}
 
 	}
